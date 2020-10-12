@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,9 +32,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Person person = list.get(position);
-        holder.edit_name.setText(person.getName());
-        holder.edit_phone.setText(person.getPhone());
-        holder.edit_email.setText(person.getEmail());
+        holder.textViewName.setText(person.getName());
+        holder.textViewPhone.setText(person.getPhone());
+        holder.textViewEmail.setText(person.getEmail());
     }
 
     @Override
@@ -45,14 +45,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image_photo;
-        EditText edit_name, edit_phone, edit_email;
+        TextView textViewName, textViewPhone, textViewEmail;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image_photo = itemView.findViewById(R.id.image_photo);
-            edit_name = itemView.findViewById(R.id.edit_name);
-            edit_phone = itemView.findViewById(R.id.edit_phone);
-            edit_email = itemView.findViewById(R.id.edit_email);
+            textViewName = itemView.findViewById(R.id.text_name);
+            textViewPhone = itemView.findViewById(R.id.text_phone);
+            textViewEmail = itemView.findViewById(R.id.text_email);
         }
     }
 
