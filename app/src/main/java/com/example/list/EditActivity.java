@@ -11,6 +11,8 @@ public class EditActivity extends AppCompatActivity {
 
     public static final int ADD = 1;
     public static final int EDIT = 2;
+    public static final String POSITION = "POSITION";
+
 
     public static final String NAME = "NAME";
     public static final String PHONE = "PHONE";
@@ -18,6 +20,7 @@ public class EditActivity extends AppCompatActivity {
 
     private EditText editName, editPhone, editEmail;
     Intent result;
+    int position;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,16 @@ public class EditActivity extends AppCompatActivity {
     private void initIntent() {
         result = new Intent();
         setResult(RESULT_CANCELED, result);
+        Intent intent = getIntent();
+        if (intent.getExtras() == null){
+            position = -1;
+        } else {
+            position = intent.getIntExtra(POSITION, -1);
+            editName.setText(intent.getStringExtra(NAME));
+            editPhone.setText(intent.getStringExtra(PHONE));
+            editEmail.setText(intent.getStringExtra(EMAIL));
+
+        }
     }
 
     private void initEditText() {
@@ -43,6 +56,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void onSave(View view){
+        result.putExtra(POSITION, position);
         result.putExtra(NAME, editName.getText().toString());
         result.putExtra(PHONE,  editPhone.getText().toString());
         result.putExtra(EMAIL, editEmail.getText().toString());

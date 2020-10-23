@@ -1,6 +1,7 @@
 package com.example.list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,22 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Person person = list.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final Person person = list.get(position);
         holder.textViewName.setText(person.getName());
         holder.textViewPhone.setText(person.getPhone());
         holder.textViewEmail.setText(person.getEmail());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EditActivity.class);
+                intent.putExtra(EditActivity.POSITION, position);
+                intent.putExtra(EditActivity.NAME, person.getName());
+                intent.putExtra(EditActivity.PHONE, person.getPhone());
+                intent.putExtra(EditActivity.EMAIL, person.getEmail());
+                ((MainActivity)context).startActivityForResult(intent, EditActivity.EDIT);
+            }
+        });
     }
 
     @Override

@@ -55,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
                 list.add(person);
                 adapter.notifyDataSetChanged();
             }
+            if (requestCode == EditActivity.EDIT){
+                int position = data.getIntExtra(EditActivity.POSITION, -1);
+                if (position == -1) return;
+                Person person = list.get(position);
+                person.setName(data.getStringExtra(EditActivity.NAME));
+                person.setPhone(data.getStringExtra(EditActivity.PHONE));
+                person.setEmail(data.getStringExtra(EditActivity.EMAIL));
+                list.set(position, person);
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 }
